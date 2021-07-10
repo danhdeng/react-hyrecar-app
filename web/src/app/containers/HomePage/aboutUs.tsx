@@ -10,13 +10,14 @@ const AboutUsContainer=styled.div`
         w-full
         flex
         flex-wrap
+    	items-center
         justify-center
         pt-4
         pb-4
         pr-7
         pl-7
-        md:pl-8
-        md:pr-8
+    	md:pl-0
+    	md:pr-0
         bg-white
     `};
 `;
@@ -28,10 +29,10 @@ const CarContainer=styled.div`
 
     img {
         width: auto;
-
+    height: 100%;
     }
     @media (min-width: ${Screens.md}){
-        height:20em;
+    height: 28em;
     }
     @media (min-width: ${Screens.lg}){
         height:30em;
@@ -68,7 +69,7 @@ const Title=styled.h1`
 
 const InfoText=styled.p`
     ${tw`
-        max-w-2xl
+    md:max-w-2xl
         text-sm
         md:text-base
         text-gray-500

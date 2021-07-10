@@ -1,35 +1,71 @@
 import React from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-
-
-import MclarenCarImg from "../../../assets/images/mclaren-orange-big.png";
-import JeepImg from "../../../assets/images/car-logo-dark.png";
-
-import BlobImg from "../../../assets/images/blob.svg";
 import ImprezaImg from "../../../assets/images/subaru-wrx.png";
-import Button from '../../components/button'
-import { Screens } from '../../responsive'
-const TopSectionContainer=styled.div`
-    min-height: 400px;
-    ${tw`flex justify-between w-full pl-3 pr-3 max-w-screen-2xl lg:pl-12 lg:pr-12`}
+import BlobImg from "../../../assets/images/blob.svg";
+import Button  from "../../components/button";
+import { Screens } from '../../responsive';
+
+const TopSectionContainer = styled.div`
+  min-height: 400px;
+  margin-top: 6em;
+  ${tw`
+    w-full
+    max-w-screen-2xl
+    flex
+    justify-between
+    pl-3
+    pr-3
+    lg:pl-12
+    lg:pr-12
+  `};
 `;
 
-const LeftContainer=styled.div`
-    ${tw`flex flex-col w-1/2 `}
+const LeftContainer = styled.div`
+  ${tw`
+    w-1/2
+    flex
+    flex-col
+  `};
 `;
 
-const RightContainer=styled.div`
-      ${tw`relative flex flex-col w-1/2 mt-20 `}
+const RightContainer = styled.div`
+  ${tw`
+    w-1/2
+    flex
+    flex-col
+    relative
+    mt-20
+  `};
 `;
 
-const Slongan=styled.h1`
-    ${tw`mb-4 text-2xl font-bold text-black xl:text-6xl sm:text-3xl md:text-5xl lg:font-black md:font-extrabold sm:leading-snug lg:leading-normal xl:leading-relaxed`}
+const Slogan = styled.h1`
+  ${tw`
+    font-bold
+    text-2xl
+    xl:text-6xl
+    sm:text-3xl
+    md:text-5xl
+    lg:font-black
+    md:font-extrabold
+    text-black
+    mb-4
+    sm:leading-snug
+    lg:leading-normal
+    xl:leading-relaxed
+  `};
 `;
 
-
-const Description=styled.p`
-    ${tw`overflow-hidden text-xs text-gray-800 lg:text-sm xl:text-lg sm:max-h-full max-h-12`}
+const Description = styled.p`
+  ${tw`
+    text-xs
+    lg:text-sm
+    xl:text-lg
+    sm:max-h-full
+    overflow-hidden
+    max-h-12
+    text-gray-800
+  `};
 `;
 
 const BlobContainer=styled.div`
@@ -58,7 +94,7 @@ const BlobContainer=styled.div`
     @media(min-width: ${Screens.lg}){
         width:50em;
         max-height: 30em;
-        right: -7m;
+        right: -7em;
         top: -15em;
         transform: rotate(-30deg)
     }
@@ -111,7 +147,7 @@ export default function TopSection() {
     return (
         <TopSectionContainer>
             <LeftContainer>
-                <Slongan>Rent the Best Quality Cars with Us</Slongan>
+                <Slogan>Rent the Best Quality Cars with Us</Slogan>
                 <Description>
                 Always choose the best car from our local stores or order it remotely
                 at the best price for you and get the best quality cars for as long as
