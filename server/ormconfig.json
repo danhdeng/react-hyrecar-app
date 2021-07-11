@@ -7,9 +7,7 @@
    "database": "hyrecar",
    "synchronize": true,
    "logging": false,
-   "entities": [
-      "src/entity/**/*.ts"
-   ],
+  "entities": ["dist/**/entities/*{.ts,.js}"],
    "migrations": [
       "src/migration/**/*.ts"
    ],

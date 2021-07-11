@@ -7,13 +7,16 @@ import { ComponentModule } from './components/comonents.module';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule, GraphQLModule.forRoot(
-    {
-      playground: process.env.NODE_DEV && true || false,
-      debug: process.env.NODE_DEV && true || false,
+  imports: [
+    ConfigModule.forRoot(),
+    DatabaseModule,
+    GraphQLModule.forRoot({
+      playground: process.env.NODE_DEV === 'dev',
+      debug: process.env.NODE_DEV === 'dev',
       autoSchemaFile: true,
-    }
-  ), ComponentModule],
+    }),
+    ComponentModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 
