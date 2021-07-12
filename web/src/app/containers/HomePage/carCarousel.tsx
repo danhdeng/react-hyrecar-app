@@ -28,8 +28,6 @@ const CarContainer=styled.div`
 
 const topCarsStateSelector=createSelector(makeSelectTopCars, (topCars)=>({topCars}));
 
-
-
 export default function CarCarousel() {
     const [current, setCurrent]=useState(0);
     const {topCars}=useSelector(topCarsStateSelector);
@@ -56,7 +54,6 @@ export default function CarCarousel() {
               breakpoints={{
                 640: {
                   plugins: [
-                    "clickToChange",
                     {
                       resolve: slidesToShowPlugin,
                       options: {
