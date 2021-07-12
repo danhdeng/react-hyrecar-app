@@ -131,7 +131,7 @@ const RentButton=styled(Button)`
 `
 
 export default function Car(props: ICarProps) {
-    const {thumbnailSrc,
+    const {thumbnailUrl,
         name,
         mileage,
         gearType,
@@ -142,7 +142,7 @@ export default function Car(props: ICarProps) {
     return (
         <CarContainer>
             <CarThumbnail>
-                <img src={thumbnailSrc} alt="" />
+                <img src={thumbnailUrl} alt="" />
             </CarThumbnail>
             <CarName>{name}</CarName>
             <PriceContainer>
