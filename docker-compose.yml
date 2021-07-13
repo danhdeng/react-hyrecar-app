@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+    mysqldb:
+        image: mysql
+        environment: 
+            - MYSQL_ROOT_PASSWORD=Mys0l@123456
+            - MYSQL_DATABASE=hyrecar
+        ports: 
+            - 3306:3306
+        command: --default-authentication-plugin=mysql_native_password
+        networks:
+            - shared-networks
+        volumes: 
+            - db-config:/etc/mysql
+            - db-data:/var/lib/mysql
+            - ./databackup/files:/databackup/data
+       
+    #acting as a proxy
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx-prod
+        volumes: 
+            - .nginx/nginx.conf:/etc/nginx/nginx.conf
+        ports: 
+            -80:80
+        command: /bin/sh -c "nginx -g 'daemon off'"    
+        depends_on: 
+            api-prod:
+                condition: service_healthy
+            api-app:
+                condition: service_started
+        networks: 
+            - shared-networks
+
+    api-prod:
+        container_name: nestjs_api_app
+        image: nestjs_api_app:1.0.0.0
+        build: 
+            context: server
+            target: production
+            dockerfile: Dockerfile
+        command: sh -c './bin/wait-for' -t 0 mysqldb:3306 -- yarn start:prod
+        depends_on: 
+            - mysqldb
+        networks: 
+            - shared-networks
+        ports: 
+            - 9000:9000
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD", "curl" "api-prod:9000"]
+            internal: 5s
+            timeout: 3s
+            retries: 6     
+        
+    app-prod:
+        container_name: rect_app_prod
+        image: rect_app_prod:1.0.0
+        build:
+            context: web
+            target: production
+            dockerfile: Dockerfile
+        command: yarn run start:prod
+        ports: 
+            - 3000:3000
+        networks: 
+            - shared-networks
+        restart: unless-stopped
+
+#intialize network
+networks: 
+    share-networks:
+
+#Initializing docker compose volumes
+volumes: 
+    db-config:
+    db-data:
