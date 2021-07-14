@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro';
 import { Title } from './common';
@@ -9,6 +9,8 @@ import { Dispatch } from '@reduxjs/toolkit/';
 import CarCarousel from './carCarousel';
 import { setTopCars } from './slicer';
 import { useDispatch } from 'react-redux';
+import MoonLoader from "react-spinners/MoonLoader";
+import { loadavg } from 'os';
 
 
 const TopCarContainer=styled.div`
@@ -26,34 +28,57 @@ const TopCarContainer=styled.div`
     `};
 `;
 
+const LoadingContainer=styled.div`
+  ${tw`
+    w-full
+    mt-9
+    flex
+    justify-center
+    items-center
+    text-base
+    text-black
+  `}
+`;
+
 const actionDispatch=(dispatch: Dispatch)=>({
   setTopCars: (cars: GetCars_cars[])=>dispatch(setTopCars(cars))
 });
 
+const wait = (timeout: number) => new Promise((rs) => setTimeout(rs, timeout));
+
 
 
 export default function TopCars() {
-    
+    const [isLoading, setIsLoading]=useState(true);
     const {setTopCars}=actionDispatch(useDispatch());
 
     const fetchTopCars=async ()=>{
+        setIsLoading(true);
         const carData=await carService.getCars().catch((err)=>{
           console.log("Error", err);
         }) as GetCars_cars[];
+
+        //await wait(6000);
+        //await new Promise(resolve => setTimeout(resolve, 5000));
+
         if(carData){
           setTopCars(carData);
         }
+        setIsLoading(false);
       }
 
       useEffect(() => {
         fetchTopCars();
       },[]);
-    
+      console.log("loading:", isLoading);
     return (
-        
         <TopCarContainer>
-            <Title>Explore Our Top Deals</Title>
-            <CarCarousel />
+          <Title>Explore Our Top Deals</Title>
+            { isLoading && (<LoadingContainer>
+            <MoonLoader loading size={20} />
+              </LoadingContainer>)
+            }
+            {!isLoading && <CarCarousel />}
         </TopCarContainer>
     )
 }

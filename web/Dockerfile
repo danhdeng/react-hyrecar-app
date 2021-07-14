@@ -1,14 +1,14 @@
 FROM node:14 as production
 
-ARG NODE_DEV=production
-ENV ENV_NODE=${NODE_DEV}
+ARG node_env_var
+ENV NODE_ENV $node_env_var
 
 WORKDIR /usr/src/app
 
 COPY package.json .
 COPY yarn.lock .
 
-RUN yar install --production=false
+RUN yarn install --production=false
 
 COPY . .
 

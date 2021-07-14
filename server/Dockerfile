@@ -1,8 +1,8 @@
 FROM node:14 as production
 
-ARG NODE_DEV=production
-
-ENV NOD_ENV=${NODE_DEV}
+ARG node_env_var
+ENV NODE_ENV=$node_env_var
+RUN echo $node_env_var
 
 WORKDIR /usr/src/api
 

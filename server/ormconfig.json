@@ -1,22 +1,22 @@
 {
-   "type": "mysql",
-   "host": "localhost",
-   "port": 3306,
-   "username": "root",
-   "password": "Mys0l@123456",
-   "database": "hyrecar",
-   "synchronize": true,
-   "logging": false,
-  "entities": ["dist/**/entities/*{.ts,.js}"],
-   "migrations": [
-      "src/migration/**/*.ts"
-   ],
-   "subscribers": [
-      "src/subscriber/**/*.ts"
-   ],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
+  "type": "mysql",
+  "host": "mysqldb",
+  "port": 3306,
+  "username": "root",
+  "password": "Mys0l@123456",
+  "database": "hyrecar",
+  "synchronize": true,
+  "logging": false,
+ "entities": ["dist/**/entities/*{.ts,.js}"],
+  "migrations": [
+     "src/migration/**/*.ts"
+  ],
+  "subscribers": [
+     "src/subscriber/**/*.ts"
+  ],
+  "cli": {
+     "entitiesDir": "src/entity",
+     "migrationsDir": "src/migration",
+     "subscribersDir": "src/subscriber"
+  }
 }
