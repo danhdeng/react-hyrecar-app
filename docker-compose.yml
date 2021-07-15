@@ -1,8 +1,8 @@
-version: "3.8"
+version: "3.3"
 
 services:
     mysqldb:
-        image: mysql
+        image: danhyrecar.azurecr.io/mysql:latest
         environment: 
             - MYSQL_ROOT_PASSWORD=Mys0l@123456
             - MYSQL_DATABASE=hyrecar
@@ -19,7 +19,7 @@ services:
     #acting as a proxy
 
     nginx:
-        image: nginx:latest
+        image: danhyrecar.azurecr.io/nginx:latest
         container_name: nginx-prod
         volumes: 
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -36,7 +36,7 @@ services:
 
     api-prod:
         container_name: nestjs_api_prod
-        image: nestjs_api_prod:1.0.0.0
+        image: danhyrecar.azurecr.io/nestjs_api_prod:1.0.0.0
         build: 
             context: server
             target: production
@@ -59,7 +59,7 @@ services:
         
     app-prod:
         container_name: rect_app_prod
-        image: rect_app_prod:1.0.0
+        image: danhyrecar.azurecr.io/rect_app_prod:1.0.0
         build:
             context: web
             target: production
@@ -78,4 +78,12 @@ networks:
 #Initializing docker compose volumes
 volumes: 
     db-config:
+        driver: azure_file
+        driver_opts:
+        share_name: db-config
+        storage_account_name: abvstorageaccount
     db-data:
+        driver: azure_file
+        driver_opts:
+        share_name: db-data
+        storage_account_name: abvstorageaccount
